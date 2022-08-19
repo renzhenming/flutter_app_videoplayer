@@ -48,6 +48,15 @@ dev_dependencies:
   flutter_splash_screen: ^1.0.0
   fluttertoast: ^8.0.7
   http: ^0.13.3
+  # 2.toast 库
+  # 6.banner左右滑动需要
+  flutter_swiper: ^1.1.6
+  # 4.InheritedWidget的包装器 ，使它们更易于使用和更可重用。
+  provider: ^5.0.0
+  # 5.State Manager、Navigation Manager
+  get: 4.2.4
+  # 7.图片扩展库
+  extended_image: ^6.2.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

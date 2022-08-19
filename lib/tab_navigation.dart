@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_videoplayer/config/my_string.dart';
+import 'package:flutter_app_videoplayer/page/home/home_page.dart';
+import 'package:flutter_app_videoplayer/viewmodel/tab_navigation_viewmodel.dart';
+import 'package:flutter_app_videoplayer/widget/provider_widget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class TabNavigation extends StatefulWidget {
@@ -10,22 +13,43 @@ class TabNavigation extends StatefulWidget {
 class _TabNavigationState extends State<TabNavigation> {
   late DateTime lastTime;
 
-  Widget _currentBody = Container(color: Colors.yellow);
-  int _currentIndex = 0;
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: _onWillPop,
         child: Scaffold(
-            body: _currentBody,
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _currentIndex,
-              type: BottomNavigationBarType.fixed,
-              selectedItemColor: Color(0xff000000),
-              unselectedItemColor: Color(0xff9a9a9a),
-              items: _items(),
-              onTap: _onTap,
+            body: PageView(
+              controller: _pageController,
+              children: [
+                HomePage(),
+                Container(color: Colors.black),
+                Container(color: Colors.brown),
+                Container(color: Colors.blueGrey)
+              ],
+            ),
+            bottomNavigationBar: ProviderWidget(
+              model: TabNavigationViewModel(),
+              builder: (BuildContext context, TabNavigationViewModel model,
+                  Widget? child) {
+                return BottomNavigationBar(
+                  currentIndex: model.currentIndex,
+                  type: BottomNavigationBarType.fixed,
+                  selectedItemColor: const Color(0xff000000),
+                  unselectedItemColor: const Color(0xff9a9a9a),
+                  items: _items(),
+                  onTap: (index) {
+                    if (model.currentIndex != index) {
+                      _pageController.jumpToPage(index);
+                      model.changeBottomTabIndex(index);
+                    }
+                  },
+                );
+              },
+              onModelInit: (model) {
+                print('TabNavigation onModelInit');
+              },
             )));
   }
 
@@ -67,26 +91,5 @@ class _TabNavigationState extends State<TabNavigation> {
           height: 24,
         ),
         label: title);
-  }
-
-  _onTap(int index) {
-    print("index = $index");
-    switch (index) {
-      case 0:
-        _currentBody = Container(color: Colors.yellow);
-        break;
-      case 1:
-        _currentBody = Container(color: Colors.orange);
-        break;
-      case 2:
-        _currentBody = Container(color: Colors.blue);
-        break;
-      case 3:
-        _currentBody = Container(color: Colors.green);
-        break;
-    }
-    setState(() {
-      _currentIndex = index;
-    });
   }
 }
