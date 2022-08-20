@@ -35,12 +35,12 @@ class BannerWidget extends StatelessWidget {
               // 放于底部
               bottom: 0,
               child: Container(
-                padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
+                padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
                 // decoration:装饰,设置子控件的背景颜色、形状等
-                decoration: BoxDecoration(color: Colors.black12),
+                decoration: const BoxDecoration(color: Colors.black12),
                 child: Text(
                   model!.bannerList[index].data!.title!,
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+                  style: const TextStyle(color: Colors.white, fontSize: 12),
                 ),
               ),
             )
@@ -53,13 +53,13 @@ class BannerWidget extends StatelessWidget {
       },
       itemCount: model!.bannerList?.length ?? 0,
       // banner 指示器
-      pagination: new SwiperPagination(
+      pagination: const SwiperPagination(
         // 位置：右下角
         alignment: Alignment.bottomRight,
         // 指示器的样式
         builder: DotSwiperPaginationBuilder(
             size: 8,
-            activeSize: 8,
+            activeSize: 10,
             activeColor: Colors.white,
             color: Colors.white24),
       ),
