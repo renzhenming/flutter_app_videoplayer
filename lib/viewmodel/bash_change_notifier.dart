@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 enum ViewState { loading, done, error }
 
-class BaseChangeNotifier with ChangeNotifier {
+class BaseChangeNotifier extends ChangeNotifier {
   ViewState viewState = ViewState.loading;
   bool _dispose = false;
 
