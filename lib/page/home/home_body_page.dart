@@ -1,29 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_videoplayer/model/common_item.dart';
+import 'package:flutter_app_videoplayer/state/base_list_state.dart';
 import 'package:flutter_app_videoplayer/viewmodel/home/home_page_viewmodel.dart';
 import 'package:flutter_app_videoplayer/widget/home/banner_widget.dart';
-import 'package:flutter_app_videoplayer/widget/loading_state_widget.dart';
-import 'package:flutter_app_videoplayer/widget/provider_widget.dart';
 
 class HomeBodyPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _HomeBodyPageState();
 }
 
-class _HomeBodyPageState extends State<HomeBodyPage> {
-  @override
-  Widget build(BuildContext context) {
-    return ProviderWidget<HomePageViewModel>(
-        model: HomePageViewModel(),
-        onModelInit: (model) => model.refresh(),
-        builder:
-            (BuildContext context, HomePageViewModel model, Widget? child) {
-          return LoadingStateWidget(
-              viewState: model.viewState,
-              retry: model.retry,
-              child: _banner(model));
-        });
-  }
-
+class _HomeBodyPageState
+    extends BaseListState<Item, HomePageViewModel, HomeBodyPage> {
   _banner(model) {
     return Container(
       height: 200,
@@ -34,4 +21,12 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
       ),
     );
   }
+
+  @override
+  Widget getContentChild(HomePageViewModel model) {
+    return _banner(model);
+  }
+
+  @override
+  HomePageViewModel get viewModel => HomePageViewModel();
 }
