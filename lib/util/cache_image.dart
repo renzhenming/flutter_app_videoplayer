@@ -21,5 +21,8 @@ Widget cacheImage(String url,
 }
 
 ImageProvider cachedNetworkImageProvider(String url) {
+  if(url.isEmpty){
+    url = "https://img0.baidu.com/it/u=2568650289,2027149816&fm=253&fmt=auto&app=138&f=JPEG?w=224&h=152";
+  }
   return ExtendedNetworkImageProvider(url);
 }
