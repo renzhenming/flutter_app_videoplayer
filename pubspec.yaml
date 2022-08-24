@@ -59,6 +59,10 @@ dev_dependencies:
   extended_image: ^6.2.1
   # 8.下拉刷新和上拉加载的库
   pull_to_refresh: ^2.0.0
+  # 9.依赖于Dart常用工具类库common_utils，以及对其他第三方库封装
+  flustars: ^2.0.1
+  # 10.分享
+  share_plus: ^2.1.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
